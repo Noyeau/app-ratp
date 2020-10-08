@@ -1,11 +1,15 @@
+<ng-container *ngIf="ready">
 <mat-tab-group mat-stretch-tabs>
   <mat-tab label="Info">
-    <app-search-form></app-search-form>
+  <app-home></app-home>
   </mat-tab>
   <mat-tab label="Station">
-    <app-listType></app-listType>
+     <app-search-form></app-search-form>
   </mat-tab>
   <mat-tab label="Third">
     <div #mermaid>TEST</div>
+     <app-listType></app-listType>
   </mat-tab>
 </mat-tab-group>
+
+</ng-container>

@@ -1,13 +1,18 @@
 <div>
-  <img style="width: 50px; margin:3px" [src]="getIcon(lineType)"/>
+  <div class="flex-container center">
+    <img style="width: 50px; margin:3px" [src]="getIcon(lineType)" />
 
-  <img style="width: 30px; margin:3px" [src]="getIcon(lineType, line.code)"/>
+    <img style="width: 50px; margin:3px" [src]="getIcon(lineType, lineCode)" />
+  </div>
+  <h2 style="text-align: center;"> {{station.name}}</h2>
+
 </div>
 
-<div class="flex-container vertical">
+
+<div class="flex-container">
   <mat-card class="flex-item" *ngFor="let destination of datas">
     <mat-card-header>
-      <mat-card-title> {{destination.destination}}</mat-card-title>
+      <h3> {{destination.destination}}</h3>
     </mat-card-header>
 
     <mat-chip-list aria-label="Fish selection">
@@ -16,7 +21,11 @@
         <mat-chip color="primary" selected>{{message}}</mat-chip>
       </ng-container>
     </mat-chip-list>
-
   </mat-card>
 
 </div>
+<button mat-raised-button
+(click)="!isfavoris()?addTofavoris():delTofavoris()"
+color="{{!isfavoris()?'primary':'accent'}}" style="width: 100%;">
+{{!isfavoris()?'Ajouter':'Supprimer'}} Favori
+</button>

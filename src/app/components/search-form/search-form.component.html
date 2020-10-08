@@ -1,5 +1,6 @@
 <mat-vertical-stepper #stepper [linear]="true">
-  <mat-step [completed]="selection.lineType ? true:false" >
+
+  <mat-step [completed]="selection.lineType ? true:false">
     <ng-template matStepLabel>
       Type de Transport
       <img *ngIf="selection.lineType" style="width: 20px; margin:3px" [src]="getIcon(selection.lineType)" />
@@ -14,9 +15,11 @@
       </ng-template>
     </ng-container>
   </mat-step>
-  <mat-step [completed]="selection.line ? true:false" >
+
+  <mat-step [completed]="selection.line ? true:false">
     <ng-template matStepLabel>Ligne
-      <img *ngIf="selection.line" style="width: 20px; margin:3px" [src]="getIcon(selection.lineType, selection.line.code)" />
+      <img *ngIf="selection.line" style="width: 20px; margin:3px"
+        [src]="getIcon(selection.lineType, selection.line.code)" />
 
     </ng-template>
     <mat-chip-list class="flex-container">
@@ -26,26 +29,24 @@
             (click)="setLine(line);stepper.next()" />
         </ng-container>
         <ng-template #chip>
-          <mat-chip  (click)="setLine(line);stepper.next()">{{line.name}}</mat-chip>
+          <mat-chip (click)="setLine(line);stepper.next()">{{line.name}}</mat-chip>
         </ng-template>
       </ng-container>
     </mat-chip-list>
   </mat-step>
+
   <mat-step [completed]="allValide()">
     <ng-template matStepLabel>Station</ng-template>
     <mat-list role="list">
       <ng-container *ngFor="let station of stationList">
         <mat-list-item role="listitem" (click)="setStation(station);stepper.next()">{{station.name}}</mat-list-item>
       </ng-container>
-
-
-
     </mat-list>
   </mat-step>
+  
   <mat-step *ngIf="allValide()">
     <ng-template matStepLabel>Resultat</ng-template>
-<app-shedule  [lineType]="selection.lineType" [line]="selection.line" [station]="selection.station">
-
-</app-shedule>
+    <app-shedule [lineType]="selection.lineType" [lineCode]="selection.line.code" [stationSlug]="selection.station.slug"></app-shedule>
   </mat-step>
+
 </mat-vertical-stepper>

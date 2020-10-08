@@ -12,13 +12,27 @@ export class RatpService {
 
     public allDatas: any[] = JSON.parse(localStorage.getItem('allDatas')) || []
 
-    linesType = []
+    linesType = JSON.parse(localStorage.getItem('linesType')) || []
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
     ) {
         this.initIcons()
     }
+
+    initService() {
+        return new Promise(resolve=>{
+            if (!this.allDatas || this.allDatas.length == 0 || !this.linesType || this.linesType.length == 0) {
+                this.getallDatas().subscribe(res=>{
+                    resolve()
+                })
+            }
+            resolve()
+        })
+      
+
+    }
+
 
     initIcons() {
         ratpIcons.forEach((x: any) => {
@@ -73,9 +87,6 @@ export class RatpService {
     }
 
 
-    initService() {
-        this.getallDatas().subscribe()
-    }
 
 
     getallDatas() {
@@ -86,8 +97,10 @@ export class RatpService {
                 this.allDatas.push({
                     type, lines: res.result[type]
                 })
-                this.saveLocalDatas()
+
             }
+
+            this.saveLocalDatas()
         }));
     }
 
@@ -96,10 +109,11 @@ export class RatpService {
     }
 
     getLine(lineType, lineCode): any {
+        console.log(lineType, lineCode)
         return this.getLines(lineType).lines.find(x => x.code == lineCode)
     }
 
-    getStations(lineType, lineCode):Promise<any[]> {
+    getStations(lineType, lineCode): Promise<any[]> {
         return new Promise(resolve => {
 
             let line = this.getLine(lineType, lineCode)
@@ -115,12 +129,18 @@ export class RatpService {
 
     }
 
+    getStation(lineType, lineCode, stationSlug): Promise<any[]> {
+      return this.getLine(lineType, lineCode).stations.find(x=>x.slug == stationSlug) || false
+    }
+
     getShedule(lineType, lineCode, stationSlug, way = "A+R") {
         return this.http.get(this.apiUrl + `schedules/${lineType}/${lineCode}/${stationSlug}/${way}`)
     }
 
     saveLocalDatas() {
         localStorage.setItem("allDatas", JSON.stringify(this.allDatas))
+        localStorage.setItem("linesType", JSON.stringify(this.linesType))
+
     }
 
 }

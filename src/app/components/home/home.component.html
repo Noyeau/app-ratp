@@ -1,0 +1,26 @@
+<!-- <div class="flex-container">
+
+  <app-shedule *ngFor="let elem of elems" [lineCode]="elem.code" [lineType]="elem.type" [stationSlug]="elem.slug">
+
+  </app-shedule>
+</div> -->
+
+
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel *ngFor="let elem of elems">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <img style="width: 30px; margin:3px" [src]="getIcon(elem.type)" />
+        <img style="width: 30px; margin:3px" [src]="getIcon(elem.type, elem.code)" />
+      </mat-panel-title>
+    <mat-panel-description>
+      {{elem.slug}}
+    </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-shedule  [lineCode]="elem.code" [lineType]="elem.type" [stationSlug]="elem.slug">
+    </app-shedule>
+
+
+  </mat-expansion-panel>
+ 
+</mat-accordion>

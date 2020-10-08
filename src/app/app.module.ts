@@ -11,6 +11,7 @@ import { ListTypeComponent } from './components/listType/listType.component';
 import { SheduleComponent } from './components/shedule/shedule.component';
 import { BottomSheduleComponent } from './components/bottom-shedule/bottom-shedule.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [	
@@ -19,7 +20,8 @@ import { SearchFormComponent } from './components/search-form/search-form.compon
     ListTypeComponent,
     SheduleComponent,
     BottomSheduleComponent,
-      SearchFormComponent
+      SearchFormComponent,
+      HomeComponent
    ],
   imports: [
     BrowserModule,
