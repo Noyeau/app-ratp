@@ -1,0 +1,61 @@
+<mat-card>
+  <mat-card-header>
+    <img *ngIf="getIcon(type.type)" mat-card-avatar [src]="getIcon(type.type)" class="example-header-image" />
+    <mat-card-title>{{type.type | uppercase}}</mat-card-title>
+    <mat-card-subtitle> {{type.lines.length}} lignes</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+
+
+
+    <mat-chip-list  class="flex-container">
+
+      <ng-container *ngFor="let line of type.lines">
+
+        <ng-container *ngIf="getIcon(type.type, line.code); else chip">
+          <img style="width: 30px; margin:3px" [src]="getIcon(type.type, line.code)" (click)="displayStations(line)" />
+
+        </ng-container>
+        <ng-template #chip>
+          <mat-chip (click)="displayStations(line)">{{line.name}}</mat-chip>
+        </ng-template>
+      </ng-container>
+    </mat-chip-list>
+
+
+  </mat-card-content>
+  <mat-card-actions *ngIf="selectedLine">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+
+        <mat-panel-title>
+
+          <ng-container *ngIf="getIcon(type.type, selectedLine.code); else chip">
+            <img style="width: 30px; margin:3px" [src]="getIcon(type.type)"/>
+
+            <img style="width: 30px; margin:3px" [src]="getIcon(type.type, selectedLine.code)"/>
+          </ng-container>
+          <ng-template #chip>
+            {{getIcon(type.type) ? getIcon(type.type, selectedLine.code) :selectedLine?.name | uppercase}}
+
+          </ng-template>
+
+
+        </mat-panel-title>
+        <mat-panel-description>
+          {{stations?.length}} stations
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-list role="list">
+        <ng-container *ngFor="let station of stations">
+          <mat-list-item role="listitem" (click)="clickStation(station)">{{station.name}}</mat-list-item>
+        </ng-container>
+
+      </mat-list>
+
+
+    </mat-expansion-panel>
+  </mat-card-actions>
+</mat-card>

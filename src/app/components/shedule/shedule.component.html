@@ -1,0 +1,22 @@
+<div>
+  <img style="width: 50px; margin:3px" [src]="getIcon(lineType)"/>
+
+  <img style="width: 30px; margin:3px" [src]="getIcon(lineType, line.code)"/>
+</div>
+
+<div class="flex-container vertical">
+  <mat-card class="flex-item" *ngFor="let destination of datas">
+    <mat-card-header>
+      <mat-card-title> {{destination.destination}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-chip-list aria-label="Fish selection">
+
+      <ng-container *ngFor="let message of destination.messages">
+        <mat-chip color="primary" selected>{{message}}</mat-chip>
+      </ng-container>
+    </mat-chip-list>
+
+  </mat-card>
+
+</div>
