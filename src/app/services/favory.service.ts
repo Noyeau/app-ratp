@@ -21,9 +21,9 @@ console.log(this.favoryList)
 
     return this.favoryList.find((x: any) => x.type == type && x.code == code && x.slug == slug)
   }
-  addFavory(type, code, slug) {
+  addFavory(type, code, slug, stationName=false) {
     if (!this.getfavory(type, code, slug)) {
-      this.favoryList.push({ type, code, slug })
+      this.favoryList.push({ type, code, slug, stationName })
     }
     this.saveFavory()
   }

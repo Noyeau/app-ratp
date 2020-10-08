@@ -14,7 +14,7 @@
         <img style="width: 30px; margin:3px" [src]="getIcon(elem.type, elem.code)" />
       </mat-panel-title>
     <mat-panel-description>
-      {{elem.slug}}
+      {{elem.stationName}}
     </mat-panel-description>
     </mat-expansion-panel-header>
     <app-shedule  [lineCode]="elem.code" [lineType]="elem.type" [stationSlug]="elem.slug">

@@ -10,9 +10,32 @@ import { FavoryService } from 'src/app/services/favory.service';
 })
 
 export class SheduleComponent implements OnInit {
-  @Input() lineType
-  @Input() lineCode
-  @Input() stationSlug
+  private _lineType
+  private _lineCode
+  private _stationSlug
+
+  @Input() set lineType(value) {
+    this._lineType = value;
+    this.init()
+  }
+  @Input() set lineCode(value) {
+    this._lineCode = value;
+    this.init()
+  }
+  @Input() set stationSlug(value) {
+    this._stationSlug = value;
+    this.init()
+  }
+
+  get lineType() {
+    return this._lineType;
+  }
+  get lineCode() {
+    return this._lineCode;
+  }
+  get stationSlug() {
+    return this._stationSlug;
+  }
 
   line
   station
@@ -23,14 +46,19 @@ export class SheduleComponent implements OnInit {
     private ratpService: RatpService,
     public favoryService: FavoryService
   ) { }
-
-  ngOnInit() {
-    this.line = this.ratpService.getLine(this.lineType, this.lineCode)
-    this.station = this.ratpService.getStation(this.lineType, this.lineCode, this.stationSlug)
-    this.update()
-    this.timer = setInterval(() => {
+  init() {
+    if(this.lineType && this.lineCode && this.stationSlug){
+      this.line = this.ratpService.getLine(this.lineType, this.lineCode)
+      this.station = this.ratpService.getStation(this.lineType, this.lineCode, this.stationSlug)
       this.update()
-    }, 5000)
+      this.timer = setInterval(() => {
+        this.update()
+      }, 5000)
+    }
+
+  }
+  ngOnInit() {
+
 
 
   }
@@ -59,7 +87,7 @@ export class SheduleComponent implements OnInit {
 
 
   addTofavoris() {
-    this.favoryService.addFavory(this.lineType, this.lineCode, this.stationSlug)
+    this.favoryService.addFavory(this.lineType, this.lineCode, this.stationSlug, this.station.name)
   }
 
   isfavoris() {

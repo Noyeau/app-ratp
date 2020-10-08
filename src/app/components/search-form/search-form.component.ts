@@ -39,6 +39,25 @@ export class SearchFormComponent implements OnInit {
     }, 200)
   }
 
+  
+  setLine(line) {
+    this.selection.line = line
+    this.getStations()
+    this.selection.station = null
+    setTimeout(() => {
+      this.stepper.next()
+    }, 200)
+  }
+
+  setStation(station) {
+    console.log(station)
+    this.selection.station = station
+    console.log(this.selection)
+    setTimeout(() => {
+      this.stepper.next()
+    }, 200)
+  }
+
 
   getLines(lineType) {
     return this.ratpService.getLines(lineType)
@@ -51,21 +70,6 @@ export class SearchFormComponent implements OnInit {
 
 
 
-  setLine(line) {
-    this.selection.line = line
-    this.getStations()
-    this.selection.station = null
-    setTimeout(() => {
-      this.stepper.next()
-    }, 200)
-  }
-
-  setStation(station) {
-    this.selection.station = station
-    setTimeout(() => {
-      this.stepper.next()
-    }, 200)
-  }
 
   getStations() {
     if (!this.selection.line) {
