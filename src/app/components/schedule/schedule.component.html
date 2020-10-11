@@ -4,13 +4,21 @@
 
     <img style="width: 50px; margin:3px" [src]="getIcon(lineType, lineCode)" />
 
-    
-      <mat-icon class="fav-icon" aria-hidden="false" aria-label="addFavory"
-      (click)="!isfavoris()?addTofavoris():delTofavoris()"
-      color="{{!isfavoris()?'primary':'accent'}}">
+
+    <!-- <div class="fav-icon">
+      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+    </div> -->
+    <button mat-mini-fab class="fav-icon" (click)="!isfavoris()?addTofavoris():delTofavoris()"  color="{{!isfavoris()?'primary':'accent'}}">
+      <mat-icon aria-hidden="false" aria-label="addFavory"
+      
+     >
       {{!isfavoris()?'favorite_border':'favorite'}}
     </mat-icon>
-
+  </button>
 
   </div>
   <h2 style="text-align: center;"> {{station?.name}}</h2>
