@@ -124,7 +124,12 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.favoryService.deleteFavory(this.lineType, this.lineCode, this.stationSlug)
   }
 
-
+canShare(){
+  if (!("share" in navigator)) {
+    return false
+  }
+  return true
+}
   share(){
     let url = `https://ratp.noyeau.io/direct/?lineType=${encodeURI(this.lineType)}&lineCode=${encodeURI(this.lineCode)}&stationSlug=${encodeURI(this.stationSlug)}`
     let data = {
