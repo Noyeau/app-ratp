@@ -23,7 +23,7 @@ export class DirectComponent implements OnInit {
       if(res.lineType && res.lineCode && res.stationSlug){
         this.lineType=res.lineType;
         this.lineCode=res.lineCode;
-        this.stationSlug=res.stationSlug;
+        this.stationSlug=res.stationSlug.replace(/ /gi, '+');
       }
     })
   }
