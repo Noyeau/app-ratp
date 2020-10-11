@@ -126,16 +126,18 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
 
   share(){
+    let url = `https://ratp.noyeau.io/direct/?lineType=${encodeURI(this.lineType)}&lineCode=${encodeURI(this.lineCode)}&stationSlug=${encodeURI(this.stationSlug)}`
+    let data = {
+      title: 'RATP-Live',
+      text: 'Trafic de la station en LIVE',
+      url: url
+    }
+    console.log(data)
     if (!("share" in navigator)) {
       alert('Web Share API not supported.');
       return;
     }
-    let data = {
-      title: 'RATP-Live',
-      text: 'Trafic de la station en LIVE',
-      url: `https://ratp.noyeau.io/direct/?lineType=${this.lineType}&lineCode=${this.lineCode}&stationSlug=${this.stationSlug}`
-    }
-    console.log(data)
+
     window.navigator['share'](data)
     .then(() => console.log('Successful share'))
     .catch(error => console.log('Error sharing:', error));
