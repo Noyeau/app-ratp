@@ -6,29 +6,35 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import { ListLineComponent } from './components/listLine/listLine.component';
-import { ListTypeComponent } from './components/listType/listType.component';
-import { SheduleComponent } from './components/shedule/shedule.component';
-import { BottomSheduleComponent } from './components/bottom-shedule/bottom-shedule.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { BottomScheduleComponent } from './components/bottom-schedule/bottom-schedule.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
+import { FavoryComponent } from './components/favory/favory.component';
+import { ScheduleItemComponent } from './components/schedule-item/schedule-item.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 import { HomeComponent } from './components/home/home.component';
+import { DirectComponent } from './components/direct/direct.component';
+
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
-    ListLineComponent,
-    ListTypeComponent,
-    SheduleComponent,
-    BottomSheduleComponent,
-      SearchFormComponent,
-      HomeComponent
-   ],
+    ScheduleComponent,
+    BottomScheduleComponent,
+    SearchFormComponent,
+    FavoryComponent,
+    ScheduleItemComponent,
+    HomeComponent,
+    DirectComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]

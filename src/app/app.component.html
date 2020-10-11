@@ -1,15 +1,8 @@
+<mat-toolbar style="margin-bottom: 5px;">
+  <span>RATP-Live</span>
+</mat-toolbar>
+
 <ng-container *ngIf="ready">
-<mat-tab-group mat-stretch-tabs>
-  <mat-tab label="Info">
-  <app-home></app-home>
-  </mat-tab>
-  <mat-tab label="Station">
-     <app-search-form></app-search-form>
-  </mat-tab>
-  <mat-tab label="Third">
-    <div #mermaid>TEST</div>
-     <app-listType></app-listType>
-  </mat-tab>
-</mat-tab-group>
+<router-outlet></router-outlet>
 
 </ng-container>

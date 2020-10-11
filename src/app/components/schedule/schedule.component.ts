@@ -1,29 +1,36 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
-import { RatpService } from 'src/app/services/ratp.service';
-import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FavoryService } from 'src/app/services/favory.service';
+import { NgxNoyRatpService } from 'ngx-noy-ratp';
+import { IconService } from 'src/app/services/icon.service';
 
 @Component({
-  selector: 'app-shedule',
-  templateUrl: './shedule.component.html',
-  styleUrls: ['./shedule.component.scss']
+  selector: 'app-schedule',
+  templateUrl: './schedule.component.html',
+  styleUrls: ['./schedule.component.scss']
 })
 
-export class SheduleComponent implements OnInit {
+export class ScheduleComponent implements OnInit, OnDestroy {
   private _lineType
   private _lineCode
   private _stationSlug
 
+  private _request
+
   @Input() set lineType(value) {
     this._lineType = value;
+    console.log(value)
     this.init()
   }
   @Input() set lineCode(value) {
     this._lineCode = value;
+    console.log(value)
+
     this.init()
   }
   @Input() set stationSlug(value) {
     this._stationSlug = value;
+    console.log(value)
+
     this.init()
   }
 
@@ -43,14 +50,22 @@ export class SheduleComponent implements OnInit {
   datas = []
 
   constructor(
-    private ratpService: RatpService,
-    public favoryService: FavoryService
+    private ratpService: NgxNoyRatpService,
+    public favoryService: FavoryService,
+    private iconService: IconService
   ) { }
   init() {
     if(this.lineType && this.lineCode && this.stationSlug){
-      this.line = this.ratpService.getLine(this.lineType, this.lineCode)
-      this.station = this.ratpService.getStation(this.lineType, this.lineCode, this.stationSlug)
+      this.ratpService.getLine(this.lineType, this.lineCode).subscribe(res=>{
+        this.line = res
+      })
+      this.ratpService.getStation(this.lineType, this.lineCode, this.stationSlug).subscribe(res=>{
+        this.station = res
+      })
       this.update()
+      if(this.timer)[
+        clearInterval(this.timer)
+      ]
       this.timer = setInterval(() => {
         this.update()
       }, 5000)
@@ -63,11 +78,22 @@ export class SheduleComponent implements OnInit {
 
   }
 
-  update() {
-    this.ratpService.getShedule(this.lineType, this.lineCode, this.stationSlug).subscribe((res: any) => {
-      this.datas = []
-      res.result.schedules.map(el => {
+  ngOnDestroy(){
+    if(this._request){
+      this._request.unsubscribe()
+    }
+    if(this.timer)[
+      clearInterval(this.timer)
+    ]
+  }
 
+  update() {
+    if(this._request){
+      this._request.unsubscribe()
+    }
+    this._request = this.ratpService.getSchedule(this.lineType, this.lineCode, this.stationSlug).subscribe((res: any) => {
+      this.datas = []
+      res.map(el => {
         let data = this.datas.find(x => x.destination == el.destination)
         if (!data) {
           data = {
@@ -82,7 +108,7 @@ export class SheduleComponent implements OnInit {
   }
 
   getIcon(lineType, lineCode = false) {
-    return this.ratpService.getIcon(lineType, lineCode)
+    return this.iconService.getIcon(lineType, lineCode)
   }
 
 

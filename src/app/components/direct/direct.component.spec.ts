@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ListTypeComponent } from './listType.component';
+import { DirectComponent } from './direct.component';
 
-describe('ListTypeComponent', () => {
-  let component: ListTypeComponent;
-  let fixture: ComponentFixture<ListTypeComponent>;
+describe('DirectComponent', () => {
+  let component: DirectComponent;
+  let fixture: ComponentFixture<DirectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListTypeComponent ]
+      declarations: [ DirectComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListTypeComponent);
+    fixture = TestBed.createComponent(DirectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

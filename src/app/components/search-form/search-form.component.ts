@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { RatpService } from 'src/app/services/ratp.service';
+import { NgxNoyRatpService } from 'ngx-noy-ratp';
+import { Observable } from 'rxjs';
+import { IconService } from 'src/app/services/icon.service';
 
 @Component({
   selector: 'app-search-form',
@@ -18,7 +20,8 @@ export class SearchFormComponent implements OnInit {
   stationList = []
 
   constructor(
-    private ratpService: RatpService,
+    private ratpService: NgxNoyRatpService,
+    private iconService: IconService
 
   ) { }
 
@@ -26,12 +29,12 @@ export class SearchFormComponent implements OnInit {
   }
 
   getLineType() {
-    return this.ratpService.linesType
+    return this.ratpService.getLinesTypes()
   }
 
-  setLineType(type) {
+  setLineType(lineType) {
     this.stationList = []
-    this.selection.lineType = type
+    this.selection.lineType = lineType
     this.selection.line = null
     this.selection.station = null
     setTimeout(() => {
@@ -39,9 +42,9 @@ export class SearchFormComponent implements OnInit {
     }, 200)
   }
 
-  
-  setLine(line) {
-    this.selection.line = line
+
+  setLine(lineCode) {
+    this.selection.line = lineCode
     this.getStations()
     this.selection.station = null
     setTimeout(() => {
@@ -60,11 +63,18 @@ export class SearchFormComponent implements OnInit {
 
 
   getLines(lineType) {
-    return this.ratpService.getLines(lineType)
+    return new Observable(observer => {
+      this.ratpService.getType(lineType).subscribe((res: any) => {
+        if (res && res.lines) {
+          return observer.next(res.lines)
+        }
+        return []
+      })
+    })
   }
 
   getIcon(lineType, lineCode = false) {
-    return this.ratpService.getIcon(lineType, lineCode)
+    return this.iconService.getIcon(lineType, lineCode)
   }
 
 
@@ -77,7 +87,7 @@ export class SearchFormComponent implements OnInit {
     } else if (this.selection.line && this.selection.line['stations']) {
       this.stationList = this.selection.line['stations']
     } else {
-      this.ratpService.getStations(this.selection.lineType, this.selection.line.code).then(res => {
+      this.ratpService.getStations(this.selection.lineType, this.selection.line.code).subscribe(res => {
         this.stationList = res
       })
     }
@@ -86,7 +96,7 @@ export class SearchFormComponent implements OnInit {
 
 
   allValide() {
-    return this.selection.lineType && this.selection.line && this.selection.station ? true : false;
+    return (this.selection.lineType && this.selection.line && this.selection.station) ? true : false;
   }
 
 }

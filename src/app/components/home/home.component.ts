@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoryService } from 'src/app/services/favory.service';
-import { RatpService } from 'src/app/services/ratp.service';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +7,22 @@ import { RatpService } from 'src/app/services/ratp.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-elems=[]
-  constructor(
-    private favoryService: FavoryService,
-    private ratpService: RatpService
 
+  constructor(
+    private favoryService: FavoryService
   ) { }
 
   ngOnInit() {
-    this.elems = this.favoryService.favoryList
   }
 
-  getIcon(lineType, lineCode = false) {
-    return this.ratpService.getIcon(lineType, lineCode)
+
+  haveFav() {
+    let favList = this.favoryService.favoryList
+    if (favList && favList.length) {
+      return true
+    }
+    return false
   }
+
 
 }

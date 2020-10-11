@@ -11,6 +11,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 const material=[
   MatTabsModule,
@@ -24,6 +26,8 @@ const material=[
   MatToolbarModule,
   MatStepperModule,
   MatButtonModule,
+  MatIconModule,
+  DragDropModule,
 ]
 
 

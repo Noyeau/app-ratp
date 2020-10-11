@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
-import { RatpService } from './services/ratp.service';
-import * as mermaid from 'mermaid'
 import { FavoryService } from './services/favory.service';
+import {  NgxNoyRatpService } from 'ngx-noy-ratp';
 
 @Component({
   selector: 'app-root',
@@ -22,18 +21,23 @@ ready=false
     securityLevel: 'loose',
   };
   constructor(
-    private ratpService: RatpService,
-    private favoryService: FavoryService) {
+    private ratpService: NgxNoyRatpService,
+    private favoryService: FavoryService
+    ) {
   }
 
   ngOnInit() {
-    
-    this.ratpService.initService().then(()=>{
-      this.favoryService.initService()
+    this.ratpService.initService(true).subscribe(()=>{
       this.ready=true
     })
+  }
 
-
+  haveFav(){
+    let favList = this.favoryService.favoryList
+    if(favList && favList.length){
+      return true
+    }
+    return  false
   }
 
   ngAfterContentInit(): void {

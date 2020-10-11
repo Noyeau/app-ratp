@@ -1,26 +1,20 @@
-<!-- <div class="flex-container">
+  <mat-tab-group mat-stretch-tabs [selectedIndex]="haveFav()?0:1">
+    <mat-tab label="Favoris" [disabled]="!haveFav()">
+      <ng-template matTabContent>
+      <app-favory></app-favory>
+      </ng-template>
+    </mat-tab>
 
-  <app-shedule *ngFor="let elem of elems" [lineCode]="elem.code" [lineType]="elem.type" [stationSlug]="elem.slug">
-
-  </app-shedule>
-</div> -->
-
-
-<mat-accordion class="example-headers-align">
-  <mat-expansion-panel *ngFor="let elem of elems">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <img style="width: 30px; margin:3px" [src]="getIcon(elem.type)" />
-        <img style="width: 30px; margin:3px" [src]="getIcon(elem.type, elem.code)" />
-      </mat-panel-title>
-    <mat-panel-description>
-      {{elem.stationName}}
-    </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-shedule  [lineCode]="elem.code" [lineType]="elem.type" [stationSlug]="elem.slug">
-    </app-shedule>
+    <mat-tab label="Recherche">
+    <ng-template matTabContent>
+      <app-search-form></app-search-form>
+    </ng-template>
+    </mat-tab>
 
 
-  </mat-expansion-panel>
- 
-</mat-accordion>
+
+    <!-- <mat-tab label="Third">
+    <div #mermaid>TEST</div>
+     <app-listType></app-listType>
+  </mat-tab> -->
+  </mat-tab-group>

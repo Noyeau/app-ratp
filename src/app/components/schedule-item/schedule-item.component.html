@@ -1,0 +1,12 @@
+<mat-nav-list>
+  <mat-list-item *ngFor="let destination of datas" (click)="openBottomSchedule()">
+    <ng-container *ngIf="destination && destination.messages && destination.messages[0]">
+        <p style="width: 100%;">{{destination.destination}}</p>
+        <br>
+        <mat-chip color="primary" style="min-width: 70px;text-align: center;" selected>{{destination.messages[0]}}</mat-chip>
+
+    </ng-container>
+
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-nav-list>

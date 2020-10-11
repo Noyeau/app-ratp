@@ -1,0 +1,25 @@
+<!-- <div class="flex-container">
+
+  <app-schedule *ngFor="let elem of elems" [lineCode]="elem.code" [lineType]="elem.type" [stationSlug]="elem.slug">
+
+  </app-schedule>
+</div> -->
+
+<mat-accordion class="example-headers-align" cdkDropList (cdkDropListDropped)="drop($event)">
+  <mat-expansion-panel  *ngFor="let favory of favoryList; let first = first" [expanded]="first" cdkDrag>
+    <mat-expansion-panel-header >
+      <mat-panel-title>
+        <img style="width: 30px; margin:3px" [src]="getIcon(favory.type)" />
+        <img style="width: 30px; margin:3px" [src]="getIcon(favory.type, favory.code)" />
+      </mat-panel-title>
+    <mat-panel-description>
+      {{favory.stationName}}
+    </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-schedule-item  [lineCode]="favory.code" [lineType]="favory.type" [stationSlug]="favory.slug">
+    </app-schedule-item>
+
+
+  </mat-expansion-panel>
+ 
+</mat-accordion>

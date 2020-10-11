@@ -3,6 +3,15 @@
     <img style="width: 50px; margin:3px" [src]="getIcon(lineType)" />
 
     <img style="width: 50px; margin:3px" [src]="getIcon(lineType, lineCode)" />
+
+    
+      <mat-icon class="fav-icon" aria-hidden="false" aria-label="addFavory"
+      (click)="!isfavoris()?addTofavoris():delTofavoris()"
+      color="{{!isfavoris()?'primary':'accent'}}">
+      {{!isfavoris()?'favorite_border':'favorite'}}
+    </mat-icon>
+
+
   </div>
   <h2 style="text-align: center;"> {{station?.name}}</h2>
 
@@ -24,8 +33,4 @@
   </mat-card>
 
 </div>
-<button mat-raised-button
-(click)="!isfavoris()?addTofavoris():delTofavoris()"
-color="{{!isfavoris()?'primary':'accent'}}" style="width: 100%;">
-{{!isfavoris()?'Ajouter':'Supprimer'}} Favori
-</button>
+

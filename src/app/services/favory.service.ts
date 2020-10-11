@@ -7,21 +7,19 @@ export class FavoryService {
   favoryList = JSON.parse(localStorage.getItem('favoryList'))
 
   constructor() {
-console.log(this.favoryList)
-  }
-
-  initService() {
-    if(!this.favoryList){
+    console.log(this.favoryList)
+    if (!this.favoryList) {
       this.favoryList = []
     }
-    console.log(this.favoryList)
   }
+
+
 
   getfavory(type, code, slug) {
 
     return this.favoryList.find((x: any) => x.type == type && x.code == code && x.slug == slug)
   }
-  addFavory(type, code, slug, stationName=false) {
+  addFavory(type, code, slug, stationName = false) {
     if (!this.getfavory(type, code, slug)) {
       this.favoryList.push({ type, code, slug, stationName })
     }
@@ -42,6 +40,10 @@ console.log(this.favoryList)
 
   private saveFavory() {
     localStorage.setItem('favoryList', JSON.stringify(this.favoryList))
+  }
 
+  updateFavoryList(favorylist){
+    this.favoryList=favorylist
+    this.saveFavory()
   }
 }
