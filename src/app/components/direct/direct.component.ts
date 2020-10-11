@@ -25,6 +25,7 @@ export class DirectComponent implements OnInit {
         this.lineCode=res.lineCode;
         this.stationSlug=res.stationSlug.replace(/ /gi, '+');
       }
+      
       console.log(this.stationSlug)
     })
   }
