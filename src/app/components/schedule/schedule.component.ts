@@ -130,14 +130,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       alert('Web Share API not supported.');
       return;
     }
-  
-    window.navigator['share']({
-        title: 'What Web Can Do Today',
-        text: 'Can I rely on the Web Platform features to build my app? An overview of the device integration HTML5 APIs',
-        url: 'https://whatwebcando.today/'
-      })
-      .then(() => console.log('Successful share'))
-      .catch(error => console.log('Error sharing:', error));
+    let data = {
+      title: 'What Web Can Do Today',
+      text: 'Can I rely on the Web Platform features to build my app? An overview of the device integration HTML5 APIs',
+      url: 'https://whatwebcando.today/'
+    }
+    console.log(data)
+    window.navigator['share'](data)
+    .then(() => console.log('Successful share'))
+    .catch(error => console.log('Error sharing:', error));
   }
 
 }
