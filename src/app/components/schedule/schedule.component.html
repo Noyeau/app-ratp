@@ -4,6 +4,12 @@
 
     <img style="width: 50px; margin:3px" [src]="getIcon(lineType, lineCode)" />
 
+    <button mat-mini-fab (click)="share()"
+   >
+    <mat-icon aria-hidden="false" aria-label="addFavory">
+      home
+    </mat-icon>
+  </button>
 
     <!-- <div class="fav-icon">
       <button mat-button [matMenuTriggerFor]="menu">Menu</button>
@@ -12,13 +18,12 @@
         <button mat-menu-item>Item 2</button>
       </mat-menu>
     </div> -->
-    <button mat-mini-fab class="fav-icon" (click)="!isfavoris()?addTofavoris():delTofavoris()"  color="{{!isfavoris()?'primary':'accent'}}">
-      <mat-icon aria-hidden="false" aria-label="addFavory"
-      
-     >
-      {{!isfavoris()?'favorite_border':'favorite'}}
-    </mat-icon>
-  </button>
+    <button mat-mini-fab class="fav-icon" (click)="!isfavoris()?addTofavoris():delTofavoris()"
+      color="{{!isfavoris()?'primary':'accent'}}">
+      <mat-icon aria-hidden="false" aria-label="addFavory">
+        {{!isfavoris()?'favorite_border':'favorite'}}
+      </mat-icon>
+    </button>
 
   </div>
   <h2 style="text-align: center;"> {{station?.name}}</h2>
@@ -41,4 +46,3 @@
   </mat-card>
 
 </div>
-

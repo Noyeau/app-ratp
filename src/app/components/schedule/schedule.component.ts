@@ -131,9 +131,9 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       return;
     }
     let data = {
-      title: 'What Web Can Do Today',
-      text: 'Can I rely on the Web Platform features to build my app? An overview of the device integration HTML5 APIs',
-      url: 'https://whatwebcando.today/'
+      title: 'RATP-Live',
+      text: 'Trafic de la station en LIVE',
+      url: `https://ratp.noyeau.io/direct/?lineType=${this.lineType}&lineCode=${this.lineCode}&stationSlug=${this.stationSlug}`
     }
     console.log(data)
     window.navigator['share'](data)
