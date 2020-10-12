@@ -500,9 +500,9 @@
         { "fileName": "noctilien.svg", "indice": "N" },
         { "fileName": "Paris_Tram_4.svg", "indice": "T4" },
         { "fileName": "Paris_Tram_11.svg", "indice": "T11" },
-        { "fileName": "Paris_RER_C.svg", "indice": "RER C" },
-        { "fileName": "Paris_RER_D.svg", "indice": "RER D" },
-        { "fileName": "Paris_RER_E.svg", "indice": "RER E" }
+        { "fileName": "Paris_RER_C_icon.svg", "indice": "RER C" },
+        { "fileName": "Paris_RER_D_icon.svg", "indice": "RER D" },
+        { "fileName": "Paris_RER_E_icon.svg", "indice": "RER E" }
     ]
 
 
