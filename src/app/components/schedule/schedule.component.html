@@ -41,11 +41,10 @@
     <mat-card-header>
       <h3> {{destination.destination}}</h3>
     </mat-card-header>
-
     <mat-chip-list aria-label="Fish selection">
 
-      <ng-container *ngFor="let message of destination.messages">
-        <mat-chip color="primary" selected>{{message}}</mat-chip>
+      <ng-container *ngFor="let train of destination.trains">
+        <mat-chip color="primary" selected (click)="train.mission?openDialog(train.mission?.code, train.mission?.stations):null">{{train.mission?.code}} {{train.message}}</mat-chip>
       </ng-container>
     </mat-chip-list>
   </mat-card>

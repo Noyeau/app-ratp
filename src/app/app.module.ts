@@ -15,6 +15,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { DirectComponent } from './components/direct/direct.component';
+import { ModalListComponent } from './components/modal-list/modal-list.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { DirectComponent } from './components/direct/direct.component';
     FavoryComponent,
     ScheduleItemComponent,
     HomeComponent,
-    DirectComponent
+    DirectComponent,
+    ModalListComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { DirectComponent } from './components/direct/direct.component';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
+  entryComponents: [ModalListComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,8 @@ import { FavoryService } from 'src/app/services/favory.service';
 import { NgxNoyRatpService } from 'ngx-noy-ratp';
 import { IconService } from 'src/app/services/icon.service';
 import { BottomScheduleComponent } from '../bottom-schedule/bottom-schedule.component';
+import { ModalListComponent } from '../modal-list/modal-list.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-schedule-item',
@@ -50,8 +52,8 @@ export class ScheduleItemComponent implements OnInit {
     private ratpService: NgxNoyRatpService,
     public favoryService: FavoryService,
     private iconService: IconService,
-    private _bottomSheet: MatBottomSheet
-
+    private _bottomSheet: MatBottomSheet,
+    public dialog: MatDialog
   ) { }
   init() {
     if(this.lineType && this.lineCode && this.stationSlug){
@@ -97,11 +99,12 @@ export class ScheduleItemComponent implements OnInit {
         if (!data) {
           data = {
             destination: el.destination,
-            messages: []
+            trains: []
           }
           this.datas.push(data)
         }
-        data.messages.push(el.message)
+        data.trains.push(el)
+
       })
     })
   }
@@ -129,5 +132,16 @@ export class ScheduleItemComponent implements OnInit {
     this._bottomSheet.open(BottomScheduleComponent, {
       data: { stationSlug:this.stationSlug, lineType: this.lineType, lineCode:this.lineCode },
     })
+  }
+
+
+  openDialog(title, list): void {
+    const dialogRef = this.dialog.open(ModalListComponent, {
+      width: '250px',
+      data: {title, list}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }

@@ -14,13 +14,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const material=[
+  MatChipsModule,
   MatTabsModule,
   MatExpansionModule,
   MatListModule,
   MatCardModule,
-  MatChipsModule,
   MatBottomSheetModule,
   MatGridListModule,
   MatDividerModule,
@@ -30,6 +31,7 @@ const material=[
   MatIconModule,
   DragDropModule,
   MatMenuModule,
+  MatDialogModule
 ]
 
 

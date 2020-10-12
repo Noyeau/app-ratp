@@ -11,7 +11,6 @@ export class BottomScheduleComponent {
   constructor(private _bottomSheetRef: MatBottomSheetRef<BottomScheduleComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     ) {
-      console.log(data)
     }
 
   openLink(event: MouseEvent): void {

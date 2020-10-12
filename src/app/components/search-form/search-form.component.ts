@@ -53,9 +53,7 @@ export class SearchFormComponent implements OnInit {
   }
 
   setStation(station) {
-    console.log(station)
     this.selection.station = station
-    console.log(this.selection)
     setTimeout(() => {
       this.stepper.next()
     }, 200)

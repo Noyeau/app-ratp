@@ -2,6 +2,8 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FavoryService } from 'src/app/services/favory.service';
 import { NgxNoyRatpService } from 'ngx-noy-ratp';
 import { IconService } from 'src/app/services/icon.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalListComponent } from '../modal-list/modal-list.component';
 
 @Component({
   selector: 'app-schedule',
@@ -18,19 +20,14 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   @Input() set lineType(value) {
     this._lineType = value;
-    console.log(value)
     this.init()
   }
   @Input() set lineCode(value) {
     this._lineCode = value;
-    console.log(value)
-
     this.init()
   }
   @Input() set stationSlug(value) {
     this._stationSlug = value;
-    console.log(value)
-
     this.init()
   }
 
@@ -52,7 +49,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   constructor(
     private ratpService: NgxNoyRatpService,
     public favoryService: FavoryService,
-    private iconService: IconService
+    private iconService: IconService,
+    public dialog: MatDialog
   ) { }
   init() {
     if(this.lineType && this.lineCode && this.stationSlug){
@@ -98,11 +96,11 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         if (!data) {
           data = {
             destination: el.destination,
-            messages: []
+            trains: []
           }
           this.datas.push(data)
         }
-        data.messages.push(el.message)
+        data.trains.push(el)
       })
     })
   }
@@ -137,7 +135,6 @@ canShare(){
       text: 'Trafic de la station en LIVE',
       url: url
     }
-    console.log(data)
     if (!("share" in navigator)) {
       alert('Web Share API not supported.');
       return;
@@ -146,6 +143,17 @@ canShare(){
     window.navigator['share'](data)
     .then(() => console.log('Successful share'))
     .catch(error => console.log('Error sharing:', error));
+  }
+
+
+  openDialog(title, list): void {
+    const dialogRef = this.dialog.open(ModalListComponent, {
+      width: '250px',
+      data: {title, list}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
 }

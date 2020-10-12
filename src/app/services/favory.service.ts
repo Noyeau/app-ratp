@@ -7,7 +7,6 @@ export class FavoryService {
   favoryList = JSON.parse(localStorage.getItem('favoryList'))
 
   constructor() {
-    console.log(this.favoryList)
     if (!this.favoryList) {
       this.favoryList = []
     }
