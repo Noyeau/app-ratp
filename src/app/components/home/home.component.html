@@ -1,20 +1,20 @@
-  <mat-tab-group mat-stretch-tabs [selectedIndex]="haveFav()?0:1">
-    <mat-tab label="Favoris" [disabled]="!haveFav()">
-      <ng-template matTabContent>
+<mat-tab-group mat-stretch-tabs [selectedIndex]="haveFav()?0:1" [backgroundColor]="'success'">
+  <mat-tab label="Favoris" [disabled]="!haveFav()">
+    <ng-template matTabContent>
       <app-favory></app-favory>
-      </ng-template>
-    </mat-tab>
+    </ng-template>
+  </mat-tab>
 
-    <mat-tab label="Recherche">
+  <mat-tab label="Recherche">
     <ng-template matTabContent>
       <app-search-form></app-search-form>
     </ng-template>
-    </mat-tab>
+  </mat-tab>
 
+  <mat-tab label="InfoTraffic">
+    <ng-template matTabContent>
+    <app-infoTrafic></app-infoTrafic>
+    </ng-template>
+  </mat-tab>
 
-
-    <!-- <mat-tab label="Third">
-    <div #mermaid>TEST</div>
-     <app-listType></app-listType>
-  </mat-tab> -->
-  </mat-tab-group>
+</mat-tab-group>

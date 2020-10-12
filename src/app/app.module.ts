@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { DirectComponent } from './components/direct/direct.component';
 import { ModalListComponent } from './components/modal-list/modal-list.component';
+import { InfoTraficComponent } from './components/infoTrafic/infoTrafic.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ModalListComponent } from './components/modal-list/modal-list.component
     ScheduleItemComponent,
     HomeComponent,
     DirectComponent,
-    ModalListComponent
+    ModalListComponent,
+    InfoTraficComponent,
   ],
   imports: [
     BrowserModule,

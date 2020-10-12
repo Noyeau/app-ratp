@@ -1,0 +1,30 @@
+<ng-container *ngFor="let type of infoTraffic | keyvalue;">
+        <img style="width: 50px; margin:3px" [src]="getIcon(type.key)" />
+
+  <div class="flex-container space-between">
+    <ng-container *ngFor="let info of type.value">
+      <ng-container *ngIf="getIcon(type.key, (type.key =='rers') ? info.line : info.line.toLowerCase()); else noIcon">
+        <div class="icon-background" matTooltip="{{info.title + ': /n'+ info.message}}"
+          [ngStyle]="{'background-image':'url('+getIcon(type.key, (type.key =='rers') ? info.line : info.line.toLowerCase())+')'}">
+          <mat-icon class="icon-status normal" *ngIf="info.slug.includes('normal')" color="success">check</mat-icon>
+          <mat-icon class="icon-status critical" *ngIf="info.slug.includes('critical')" color="success">report
+          </mat-icon>
+          <mat-icon class="icon-trav" *ngIf="info.slug.includes('trav')" color="success">engineering</mat-icon>
+
+        </div>
+        <!-- <img style="width: 50px; margin:3px" [src]="getIcon(type.key, (type.key =='rers') ? info.line : info.line.toLowerCase())" /> -->
+      </ng-container>
+      <ng-template #noIcon>
+        
+        <div class="line-background" matTooltip="{{info.title + ':'+ info.message}}">
+        {{info.line}}
+        <mat-icon class="icon-status normal" *ngIf="info.slug.includes('normal')" color="success">check</mat-icon>
+        <mat-icon class="icon-status critical" *ngIf="info.slug.includes('critical')" color="success">report
+        </mat-icon>
+        <mat-icon class="icon-trav" *ngIf="info.slug.includes('trav')" color="success">engineering</mat-icon>
+        </div>
+      </ng-template>
+    </ng-container>
+
+  </div>
+</ng-container>

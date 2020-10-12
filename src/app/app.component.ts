@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
     this.ratpService.initService(true).subscribe(() => {
       this.ready = true
     })
+    this.ratpService.initTrafficUpdate()
   }
 
 }
