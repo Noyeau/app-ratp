@@ -37,16 +37,25 @@
 
 
 <div class="flex-container">
-  <mat-card class="flex-item" *ngFor="let destination of datas">
-    <mat-card-header>
-      <h3> {{destination.destination}}</h3>
-    </mat-card-header>
-    <mat-chip-list aria-label="Fish selection">
+  <ng-container *ngIf='datas.length; else noDatas'>
+    <mat-card class="flex-item" *ngFor="let destination of datas">
+      <mat-card-header>
+        <h3> {{destination.destination}}</h3>
+      </mat-card-header>
+      <mat-chip-list aria-label="Fish selection">
 
-      <ng-container *ngFor="let train of destination.trains">
-        <mat-chip color="primary" selected (click)="train.mission?openDialog(train.mission?.code, train.mission?.stations):null">{{train.mission?.code}} {{train.message}}</mat-chip>
-      </ng-container>
-    </mat-chip-list>
-  </mat-card>
+
+        <ng-container *ngFor="let train of destination.trains">
+          <mat-chip color="primary" selected
+            (click)="train.mission?openDialog(train.mission?.code, train.mission?.stations):null">
+            {{train.mission?.code}} {{train.message}}</mat-chip>
+        </ng-container>
+      </mat-chip-list>
+    </mat-card>
+  </ng-container>
+  <ng-template #noDatas>
+    Aucune donnée
+  </ng-template>
+
 
 </div>

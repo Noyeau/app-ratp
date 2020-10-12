@@ -1,23 +1,25 @@
 <mat-nav-list>
-  <mat-list-item *ngFor="let destination of datas" (click)="openBottomSchedule()">
 
-    <ng-container *ngIf="destination && destination.trains && destination.trains[0]">
+  <ng-container *ngIf='datas.length; else noDatas'>
+
+    <mat-list-item *ngFor="let destination of datas" (click)="openBottomSchedule()">
+
+      <ng-container *ngIf="destination && destination.trains && destination.trains[0]">
         <p style="width: 100%;">{{destination.destination}}</p>
         <br>
-  <mat-chip style="min-width: 70px;text-align: center;" color="primary" selected
-  (click)="destination?.trains[0].mission?openDialog(destination.trains[0].mission?.code, destination.trains[0].mission?.stations):openBottomSchedule()">
-    {{destination.trains[0]?.mission?.code}} {{destination?.trains[0]?.message}}
-  </mat-chip>
+        <mat-chip style="min-width: 70px;text-align: center;" color="primary" selected
+          (click)="destination?.trains[0].mission?openDialog(destination.trains[0].mission?.code, destination.trains[0].mission?.stations):openBottomSchedule()">
+          {{destination.trains[0]?.mission?.code}} {{destination?.trains[0]?.message}}
+        </mat-chip>
+      </ng-container>
+      <mat-divider></mat-divider>
 
-        <!-- <mat-chip color="primary" style="min-width: 70px;text-align: center;" selected>{{destination.trains[0].message}}</mat-chip> -->
+    </mat-list-item>
 
-    </ng-container>
+  </ng-container>
 
-    <mat-divider></mat-divider>
-  </mat-list-item>
+  <ng-template #noDatas>
+    Aucune donnée
+  </ng-template>
+
 </mat-nav-list>
-
-
-<!-- <ng-container *ngFor="let train of destination.trains">
-  <mat-chip color="primary" selected (click)="train.mission?openDialog(train.mission?.code, train.mission?.stations):null">{{train.mission?.code}} {{train.message}}</mat-chip>
-</ng-container> -->
