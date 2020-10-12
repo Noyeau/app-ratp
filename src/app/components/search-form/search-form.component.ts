@@ -61,9 +61,34 @@ export class SearchFormComponent implements OnInit {
 
 
   getLines(lineType) {
+    function helpSort(name): number {
+      let tmp = name
+      if (isNaN(name)) {
+        tmp = name.split('').filter((x, i, all) => i !== all.length - 1).join('')
+        if (!isNaN(tmp)) {
+          console.log(tmp)
+          return +tmp
+        }
+      }
+      return +name
+    }
     return new Observable(observer => {
       this.ratpService.getType(lineType).subscribe((res: any) => {
         if (res && res.lines) {
+          if (lineType == "rers") {
+            res.lines = res.lines.filter(x => x.code == "A" || x.code == "B")
+          }
+          res.lines = res.lines.reduce((unique, item) => unique.find(x => x.code == item.code) ? unique : [...unique, item], [])
+
+          res.lines.sort((a, b) => {
+            if (helpSort(a.code) > helpSort(b.code)) return 1
+            else if (helpSort(a.code) < helpSort(b.code)) return -1
+            else return 0
+          })
+
+
+
+
           return observer.next(res.lines)
         }
         return []

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxNoyRatpService } from 'ngx-noy-ratp';
 import { IconService } from 'src/app/services/icon.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalInfoComponent } from '../modal-info/modal-info.component';
 
 @Component({
   selector: 'app-infoTrafic',
@@ -14,7 +16,8 @@ export class InfoTraficComponent implements OnInit {
 
   constructor(
     private ratpService:NgxNoyRatpService,
-    private iconService : IconService
+    private iconService : IconService,
+    public dialog: MatDialog
   ) {
     this.ratpService.getTraffic().subscribe(res=>{
       this.infoTraffic = res
@@ -53,4 +56,18 @@ export class InfoTraficComponent implements OnInit {
   getIcon(lineType, lineCode = false):string {
     return this.iconService.getIcon(lineType, lineCode) as string
   }
+
+
+  openDialog(info): void {
+    const dialogRef = this.dialog.open(ModalInfoComponent, {
+      // width: '250px',
+      data: {title: info.title, message: info.message}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
 }

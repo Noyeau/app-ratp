@@ -496,4 +496,10 @@
         { "fileName": "T-flou0-160x160-bleu.svg", "indice": "T" },
         { "fileName": "R-flou0-160x160-bleu.svg", "indice": "R" },
         { "fileName": "M-flou0-160x160-bleu.svg", "indice": "M" },
-        { "fileName": "Tr-flou0-160x160-bleu.svg", "indice": "Tr" }]
+        { "fileName": "Tr-flou0-160x160-bleu.svg", "indice": "Tr" },
+        { "fileName": "noctilien.svg", "indice": "N" },
+        { "fileName": "Paris_Tram_4.svg", "indice": "T4" },
+        { "fileName": "Paris_Tram_11.svg", "indice": "T11" }
+    ]
+
+

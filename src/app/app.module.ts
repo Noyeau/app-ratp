@@ -17,6 +17,9 @@ import { HomeComponent } from './components/home/home.component';
 import { DirectComponent } from './components/direct/direct.component';
 import { ModalListComponent } from './components/modal-list/modal-list.component';
 import { InfoTraficComponent } from './components/infoTrafic/infoTrafic.component';
+import { DisplayIconComponent } from './components/display-icon/display-icon.component';
+import { ModalInfoComponent } from './components/modal-info/modal-info.component';
+import { PubComponent } from './components/pub/pub.component';
 
 
 @NgModule({
@@ -31,6 +34,9 @@ import { InfoTraficComponent } from './components/infoTrafic/infoTrafic.componen
     DirectComponent,
     ModalListComponent,
     InfoTraficComponent,
+    DisplayIconComponent,
+    ModalInfoComponent,
+    PubComponent
   ],
   imports: [
     BrowserModule,

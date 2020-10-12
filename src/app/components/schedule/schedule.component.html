@@ -1,16 +1,18 @@
 <div>
   <div class="flex-container space-between">
     <div>
-      <button mat-mini-fab (click)="share()" *ngIf="canShare()">
+      <button mat-mini-fab (click)="share()" color="accent">
         <mat-icon aria-hidden="false" aria-label="addFavory">
           share
         </mat-icon>
       </button>
     </div>
     <div>
-      <img style="width: 50px; margin:3px" [src]="getIcon(lineType)" />
+      <!-- <img style="width: 50px; margin:3px" [src]="getIcon(lineType)" /> -->
+      <app-display-icon [lineType]="lineType"></app-display-icon>
+      <app-display-icon [lineType]="lineType" [lineCode]="lineCode"></app-display-icon>
 
-      <img style="width: 50px; margin:3px" [src]="getIcon(lineType, lineCode)" />
+      <!-- <img style="width: 50px; margin:3px" [src]="getIcon(lineType, lineCode)" /> -->
     </div>
 
     <button mat-mini-fab (click)="!isfavoris()?addTofavoris():delTofavoris()"

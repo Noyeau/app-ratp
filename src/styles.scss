@@ -36,6 +36,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         justify-content: center;
     
     }
+
+    .flex-container.space-around{
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+    
+    }
     
     .flex-container.space-between{
         -webkit-justify-content: space-between;

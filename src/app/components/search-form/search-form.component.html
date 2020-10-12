@@ -3,41 +3,34 @@
   <mat-step [completed]="selection.lineType ? true:false">
     <ng-template matStepLabel>
       Type de Transport
-      <img *ngIf="selection.lineType" style="width: 20px; margin:3px" [src]="getIcon(selection.lineType)" />
+      <app-display-icon *ngIf="selection.lineType" [lineType]="selection.lineType" [size]="'30px'" [fontSize]="'20px'"></app-display-icon>
+
+      <!-- <img *ngIf="selection.lineType" style="width: 20px; margin:3px" [src]="getIcon(selection.lineType)" /> -->
     </ng-template>
+    <div class="flex-container space-around">
     <ng-container *ngFor="let lineType of getLineType()">
-      <ng-container *ngIf="getIcon(lineType); else chip">
-        <img style="width: 50px; margin:3px" [src]="getIcon(lineType)" (click)="setLineType(lineType) ;stepper.next()"
-          matStepperNext />
-      </ng-container>
-      <ng-template #chip>
-        <mat-chip (click)="setLineType(lineType) ;stepper.next()">{{lineType}}</mat-chip>
-      </ng-template>
+      <app-display-icon [lineType]="lineType" (click)="setLineType(lineType) ;stepper.next()" [size]="'70px'" [fontSize]="'50px'"></app-display-icon>
     </ng-container>
+    </div>
   </mat-step>
 
   <mat-step [completed]="selection.line ? true:false">
     <ng-template matStepLabel>Ligne
-      <img *ngIf="selection.line" style="width: 20px; margin:3px"
-        [src]="getIcon(selection.lineType, selection.line.code)" />
+      <app-display-icon *ngIf="selection.line" [lineType]="selection.lineType" [lineCode]="selection.line.code" [size]="'30px'" [fontSize]="'20px'">
+      </app-display-icon>
     </ng-template>
-    <mat-chip-list class="flex-container">
+    <div class="flex-container space-around">
       <ng-container *ngFor="let line of getLines(selection.lineType) | async">
-        <ng-container *ngIf="getIcon(selection.lineType, line.code); else chip">
-          <img style="width: 30px; margin:3px" [src]="getIcon(selection.lineType, line.code)"
-            (click)="setLine(line);stepper.next()" />
-        </ng-container>
-        <ng-template #chip>
-          <mat-chip (click)="setLine(line);stepper.next()">{{line.name}}</mat-chip>
-        </ng-template>
+        <app-display-icon [lineType]="selection.lineType" (click)="setLine(line);stepper.next()" [lineCode]="line.code">
+        </app-display-icon>
       </ng-container>
-    </mat-chip-list>
+    </div>
   </mat-step>
 
   <mat-step [completed]="allValide()">
     <ng-template matStepLabel>
       Station
-    <span *ngIf="selection.station">- {{selection.station.name}}</span>
+      <span *ngIf="selection.station">- {{selection.station.name}}</span>
     </ng-template>
     <mat-list role="list">
       <ng-container *ngFor="let station of stationList">
@@ -45,10 +38,11 @@
       </ng-container>
     </mat-list>
   </mat-step>
-  
+
   <mat-step *ngIf="allValide()">
     <ng-template matStepLabel>Resultat</ng-template>
-    <app-schedule [lineType]="selection.lineType" [lineCode]="selection.line.code" [stationSlug]="selection.station.slug"></app-schedule>
+    <app-schedule [lineType]="selection.lineType" [lineCode]="selection.line.code"
+      [stationSlug]="selection.station.slug"></app-schedule>
   </mat-step>
 
 </mat-vertical-stepper>

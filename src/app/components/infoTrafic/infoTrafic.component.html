@@ -4,7 +4,7 @@
   <div class="flex-container space-between">
     <ng-container *ngFor="let info of type.value">
       <ng-container *ngIf="getIcon(type.key, (type.key =='rers') ? info.line : info.line.toLowerCase()); else noIcon">
-        <div class="icon-background" matTooltip="{{info.title + ': /n'+ info.message}}"
+        <div class="icon-background" (click)="openDialog(info)"
           [ngStyle]="{'background-image':'url('+getIcon(type.key, (type.key =='rers') ? info.line : info.line.toLowerCase())+')'}">
           <mat-icon class="icon-status normal" *ngIf="info.slug.includes('normal')" color="success">check</mat-icon>
           <mat-icon class="icon-status critical" *ngIf="info.slug.includes('critical')" color="success">report
@@ -16,7 +16,7 @@
       </ng-container>
       <ng-template #noIcon>
         
-        <div class="line-background" matTooltip="{{info.title + ':'+ info.message}}">
+        <div class="line-background" (click)="openDialog(info)">
         {{info.line}}
         <mat-icon class="icon-status normal" *ngIf="info.slug.includes('normal')" color="success">check</mat-icon>
         <mat-icon class="icon-status critical" *ngIf="info.slug.includes('critical')" color="success">report

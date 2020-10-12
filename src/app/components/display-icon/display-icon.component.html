@@ -1,0 +1,8 @@
+<ng-container *ngIf="getIcon(); else noIcon">
+  <img  [ngStyle]="{'width': this.size, 'margin':'3px'}" [src]="getIcon()" />
+</ng-container>
+<ng-template #noIcon>
+  <div class="label" [ngStyle]="{'min-width': this.size,'height': this.size, 'font-size':this.fontSize, 'line-height':this.size}">
+    {{label}}
+  </div>
+</ng-template>
