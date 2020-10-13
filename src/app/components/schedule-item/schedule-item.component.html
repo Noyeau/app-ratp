@@ -1,60 +1,57 @@
-<mat-nav-list>
 
-  <ng-container *ngIf='datas.length; else noDatas'>
-    <!-- <mat-icon class="top-left" *ngIf="displayFilters && isfavoris() && haveFilters()"
-    [color]="displayFilters?'accent':'link'"
-    (click)="displayFilters = !displayFilters" mat-card-avatar>
-      {{displayFilters?'visibility':'visibility_off'}}
-    </mat-icon> -->
+  <mat-nav-list>
+    <ng-container *ngIf='datas.length; else noDatas'>
 
-    <ng-container *ngFor="let destination of datas">
-      <ng-container *ngIf="displayDestination(destination.destination)">
+      <ng-container *ngFor="let destination of datas">
+        <ng-container *ngIf="displayDestination(destination.destination)">
 
-        <mat-card class="example-card">
-          <mat-card-header>
-            <mat-card-subtitle  (click)="openBottomSchedule()">{{destination.destination}}</mat-card-subtitle>
-            <button  class="top-right" *ngIf="displayFilters && (!activeFilter || !haveFilters()) && isfavoris()" mat-icon-button (click)="checkFilter(destination.destination)"
-              [color]="isInFilters(destination.destination)?'accent':'link'">
-              <mat-icon>{{isInFilters(destination.destination)?'visibility':'visibility_off'}}</mat-icon>
-            </button>
-            <!-- <mat-icon *ngIf="isfavoris()" (click)="checkFilter(destination.destination)"
-            [color]="isInFilters(destination.destination)?'primary':'accent'" mat-card-avatar>
-            visibility
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-subtitle (click)="openBottomSchedule()">{{destination.destination}}</mat-card-subtitle>
+              <button class="top-right" *ngIf="displayFilters && (!activeFilter || !haveFilters()) && isfavoris()"
+                mat-icon-button (click)="checkFilter(destination.destination)"
+                [color]="isInFilters(destination.destination)?'accent':'link'">
+                <mat-icon>{{isInFilters(destination.destination)?'visibility':'visibility_off'}}</mat-icon>
+              </button>
+              <!-- <mat-icon *ngIf="isfavoris()" (click)="checkFilter(destination.destination)"
+                  [color]="isInFilters(destination.destination)?'primary':'accent'" mat-card-avatar>
+                  visibility
+                </mat-icon> -->
+
+            </mat-card-header>
+            <mat-card-content>
+              <div class="flex-container">
+                <app-schedule-message class="flex-item" *ngFor="let schedule of destination.trains"
+                  [schedule]="schedule">
+                </app-schedule-message>
+              </div>
+            </mat-card-content>
+            <mat-card-footer>
+
+
+              <!-- <mat-icon class="top-left" *ngIf="displayFilters && isfavoris() && haveFilters()"
+          [color]="displayFilters?'accent':'link'"
+          (click)="displayFilters = !displayFilters" mat-card-avatar>
+            {{displayFilters?'visibility':'visibility_off'}}
           </mat-icon> -->
 
-          </mat-card-header>
-          <mat-card-content>
-            <div class="flex-container">
-              <app-schedule-message class="flex-item" *ngFor="let schedule of destination.trains" [schedule]="schedule">
-              </app-schedule-message>
-            </div>
-          </mat-card-content>
-          <mat-card-footer>
 
+            </mat-card-footer>
+          </mat-card>
+          <mat-divider></mat-divider>
 
-<!-- <mat-icon class="top-left" *ngIf="displayFilters && isfavoris() && haveFilters()"
-    [color]="displayFilters?'accent':'link'"
-    (click)="displayFilters = !displayFilters" mat-card-avatar>
-      {{displayFilters?'visibility':'visibility_off'}}
-    </mat-icon> -->
-
-
-          </mat-card-footer>
-        </mat-card>
-        <mat-divider></mat-divider>
+        </ng-container>
 
       </ng-container>
-     
+
+      <!-- <button style="width: 100%;" mat-raised-button *ngIf="isfavoris() && haveFilters()"
+        (click)="activeFilter = !activeFilter">
+        {{activeFilter?'Tout afficher':'Réduire'}}
+      </button> -->
+
     </ng-container>
+    <ng-template #noDatas>
+      <p (click)="openBottomSchedule()">Aucune donnée</p>
+    </ng-template>
+  </mat-nav-list>
 
-    <button style="width: 100%;" mat-raised-button
-    *ngIf="isfavoris() && haveFilters()"
-    (click)="activeFilter = !activeFilter">
-      {{activeFilter?'Tout afficher':'Réduire'}}
-    </button>
-
-  </ng-container>
-  <ng-template #noDatas>
-    <p (click)="openBottomSchedule()">Aucune donnée</p>
-  </ng-template>
-</mat-nav-list>

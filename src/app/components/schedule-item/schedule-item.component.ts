@@ -65,9 +65,7 @@ export class ScheduleItemComponent implements OnInit {
     public dialog: MatDialog
   ) { }
   init() {
-    if(this.activeFilter){
-      this.displayFilters = true
-    }
+
     if (this.lineType && this.lineCode && this.stationSlug) {
 
       this.favory = this.favoryService.getfavory(this.lineType, this.lineCode, this.stationSlug)
@@ -165,13 +163,13 @@ export class ScheduleItemComponent implements OnInit {
 
 
   displayDestination(destination) {
-    if (!this.displayFilters || !this.activeFilter || !this.favory || !this.favory.filters) {
-      return true
+    if(this.activeFilter){
+      if(!this.favory.filters){
+        this.favory.filters=[]
+      }
+      return (this.favory.filters.includes(destination)) ? true : false
     }
-    if (!this.favory.filters.length) {
-      return true
-    }
-    return (this.favory.filters.includes(destination)) ? true : false
+    return true
   }
 
   addFilter(destination) {
@@ -206,4 +204,6 @@ export class ScheduleItemComponent implements OnInit {
   haveFilters() {
     return (!this.favory.filters || !this.favory.filters.length) ?false : true
   }
+
+
 }
