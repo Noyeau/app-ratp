@@ -37,3 +37,16 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+.cdk-drag-placeholder {
+    // background: grey;
+opacity: 0.5;
+border: dotted 4px grey;
+border-radius: 10px;
+
+  }
+
+
+// .cdk-drag-preview {
+// // opacity: 0.5;
+//   }
