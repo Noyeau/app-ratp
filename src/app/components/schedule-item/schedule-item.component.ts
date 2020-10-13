@@ -69,12 +69,12 @@ export class ScheduleItemComponent implements OnInit {
 
       this.favory = this.favoryService.getfavory(this.lineType, this.lineCode, this.stationSlug)
 
-      this.ratpService.getLine(this.lineType, this.lineCode).subscribe(res => {
-        this.line = res
-      })
-      this.ratpService.getStation(this.lineType, this.lineCode, this.stationSlug).subscribe(res => {
-        this.station = res
-      })
+      // this.ratpService.getLine(this.lineType, this.lineCode).subscribe(res => {
+      //   this.line = res
+      // })
+      // this.ratpService.getStation(this.lineType, this.lineCode, this.stationSlug).subscribe(res => {
+      //   this.station = res
+      // })
       this.update()
       if (this.timer) [
         clearInterval(this.timer)

@@ -6,7 +6,12 @@
 }
 
 
-
+.mat-card-title{
+    margin-bottom: 0 !important;
+}
+.mat-button-toggle-group{
+    margin-right: 8px;
+}
 
 .mat-button-toggle.none{
     background-color: red;
@@ -19,4 +24,16 @@
 
 .mat-button-toggle.filtred{
     background-color: rgb(240, 240, 52);
+}
+
+.delete-zone{
+    min-width: 200px;
+    text-align: center;
+    position: fixed;
+    bottom: 10px;
+    right: 0;
+    left: 0;
+    z-index: 99000;
+    margin-right: auto;
+    margin-left: auto;
 }

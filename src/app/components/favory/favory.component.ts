@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FavoryService } from 'src/app/services/favory.service';
 import { IconService } from 'src/app/services/icon.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-favory',
@@ -10,6 +10,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class FavoryComponent implements OnInit {
   
+  dragActive = false
+  deleteOk=false
   constructor(
     private favoryService: FavoryService,
     private iconService: IconService
@@ -40,11 +42,24 @@ export class FavoryComponent implements OnInit {
   favoryList(){
     return this.favoryService.favoryList
   }
+
   changeShowValue(favory, valueSow) {
-    favory.show = valueSow
+    favory.show=[valueSow]
     this.favoryService.updateFavory(favory)
   }
 
 
 
+  deleteList=[]
+  deleteFavByIndex(event){
+    this.favoryService.favoryList.splice(event.previousIndex,1)
+    this.favoryService.updateFavoryList(this.favoryService.favoryList)
+
+
+  }
+
+
+  test(event){
+    console.log(event)
+  }
 }

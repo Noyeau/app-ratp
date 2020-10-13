@@ -20,7 +20,7 @@ export class FavoryService {
   }
   addFavory(type, code, slug, stationName = false) {
     if (!this.getfavory(type, code, slug)) {
-      this.favoryList.push({ type, code, slug, stationName , show:'none', filters:[]})
+      this.favoryList.push({ type, code, slug, stationName , show:[null], filters:[]})
     }
     this.saveFavory()
     return this.getfavory(type, code, slug)

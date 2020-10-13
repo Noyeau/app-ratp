@@ -1,57 +1,79 @@
-<div class="flex-container space-between" cdkDropList (cdkDropListDropped)="drop($event)">
+<div cdkDropListGroup>
+  <!--   -->
+<div class="delete-zone" cdkDropList #delList="cdkDropList" [cdkDropListConnectedTo]="favList"
+(cdkDropListDropped)="deleteFavByIndex($event)"
+(cdkDropListEntered)="deleteOk = true"
+(cdkDropListExited)="deleteOk = false">
+<p></p>
+  <button *ngIf="dragActive" mat-mini-fab  [disabled]="!deleteOk"
+    aria-label="Example icon button with a home icon" >
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
 
-  <div class="flex-item" *ngFor="let favory of favoryList(); let first = first" cdkDrag>
 
-    <mat-card class="example-card">
 
-      <mat-card-header>
-        <div class="flex-container space-between" style="width: 100%;">
+  <div class="flex-container space-between" cdkDropList
+  (cdkDropListDropped)="drop($event)"
+  cdkDropList #favList="cdkDropList" [cdkDropListConnectedTo]="delList"
+    >
+    <div class="example-button-container">
 
+    </div>
+    <div class="flex-item" *ngFor="let favory of favoryList(); let first = first" cdkDrag
+      (cdkDragStarted)="dragActive = true" (cdkDragReleased)="dragActive = false">
+
+      <mat-card class="example-card">
+
+        <mat-card-header>
           <mat-icon class="left" cdkDragHandle>
             drag_indicator
           </mat-icon>
 
 
-          <div>
-            <img style="width: 30px; margin:3px" [src]="getIcon(favory.type)" />
-            <img style="width: 30px; margin:3px" [src]="getIcon(favory.type, favory.code)" />
-          </div>
-        <mat-card-title>{{favory.stationName}}</mat-card-title>
 
-          
-          <mat-button-toggle-group #group="matButtonToggleGroup" [value]="favory.show"
-            (change)="changeShowValue(favory, $event.value)">
-            <mat-button-toggle #btn [class.filtred]="btn.checked" value="filtred" aria-label="Text align left" [disabled]="!favory.filters || !favory.filters.length">
-              <mat-icon inline>visibility</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle [class.all]="favory.show == 'none'" value="all" *ngIf="favory.show !== 'all'" aria-label="Text align center">
-              <mat-icon inline>reorder</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle class="none" value="none" *ngIf="favory.show == 'all'" aria-label="Text align right">
-              <mat-icon inline>clear</mat-icon>
-            </mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
-      </mat-card-header>
 
-      <mat-card-content *ngIf="favory.show !== 'none'">
-        <div class="flex-container">
-          <div class="flex-item">
-            <app-schedule-item [activeFilter]="favory.show == 'filtred'"
-              [displayFilters]="favory.show == 'all'" [lineCode]="favory.code" [lineType]="favory.type"
-              [stationSlug]="favory.slug">
-            </app-schedule-item>
+
+          <div class="col-9">
+            <div>
+              <img style="width: 30px; margin:3px" [src]="getIcon(favory.type)" />
+              <img style="width: 30px; margin:3px" [src]="getIcon(favory.type, favory.code)" />
+            </div>
+            <mat-card-title>{{favory.stationName}}</mat-card-title>
+
           </div>
-        </div>
-        <button *ngIf="favory.show == 'all'" mat-mini-fab (click)="deleteFav(favory)">
-          <mat-icon>delete_forever</mat-icon>
-        </button>
-      </mat-card-content>
-      <!-- <mat-card-actions>
+          <div class="col-3">
+
+            <mat-button-toggle-group #group="matButtonToggleGroup" [value]="favory.show" multiple
+              (change)="changeShowValue(favory, $event.value[$event.value.length-1])">
+              <mat-button-toggle [class.filtred]="favory.show[0]=='filtred'" value="filtred"
+                aria-label="Text align left" [disabled]="!favory.filters || !favory.filters.length">
+                <mat-icon inline>visibility</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle [class.all]="favory.show[0] == 'all'" value="all" aria-label="Text align center">
+                <mat-icon inline>reorder</mat-icon>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content *ngIf="favory.show[0]">
+          <div class="flex-container">
+            <div class="flex-item">
+              <app-schedule-item [activeFilter]="favory.show[0] == 'filtred'" [displayFilters]="favory.show[0] == 'all'"
+                [lineCode]="favory.code" [lineType]="favory.type" [stationSlug]="favory.slug">
+              </app-schedule-item>
+            </div>
+          </div>
+          <!-- <button *ngIf="favory.show == 'all'" mat-mini-fab (click)="deleteFav(favory)">
+            <mat-icon>delete_forever</mat-icon>
+          </button> -->
+        </mat-card-content>
+        <!-- <mat-card-actions>
         <button mat-button>LIKE</button>
         <button mat-button>SHARE</button>
       </mat-card-actions> -->
-    </mat-card>
+      </mat-card>
 
 
 
@@ -59,11 +81,11 @@
 
 
 
+
+    </div>
 
   </div>
-
 </div>
-
 
 
 <!-- 
