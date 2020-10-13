@@ -15,7 +15,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ScheduleItemComponent implements OnInit {
 
-
   public favory
   @Input() public displayFilters = false
 
@@ -31,15 +30,15 @@ export class ScheduleItemComponent implements OnInit {
 
   @Input() set lineType(value) {
     this._lineType = value;
-    this.init()
+    // this.init()
   }
   @Input() set lineCode(value) {
     this._lineCode = value;
-    this.init()
+    // this.init()
   }
   @Input() set stationSlug(value) {
     this._stationSlug = value;
-    this.init()
+    // this.init()
   }
 
   get lineType() {
@@ -87,6 +86,7 @@ export class ScheduleItemComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.init()
 
 
 
@@ -104,6 +104,12 @@ export class ScheduleItemComponent implements OnInit {
   update() {
     if (this._request) {
       this._request.unsubscribe()
+    }
+    console.log("ava,t", this.activeFilter)
+
+    if (this.activeFilter && !this.haveFilters()) {
+      console.log("bloqué", this.activeFilter)
+      return
     }
     this._request = this.ratpService.getSchedule(this.lineType, this.lineCode, this.stationSlug).subscribe((res: any) => {
       this.datas = []
@@ -163,9 +169,9 @@ export class ScheduleItemComponent implements OnInit {
 
 
   displayDestination(destination) {
-    if(this.activeFilter){
-      if(!this.favory.filters){
-        this.favory.filters=[]
+    if (this.activeFilter) {
+      if (!this.favory.filters) {
+        this.favory.filters = []
       }
       return (this.favory.filters.includes(destination)) ? true : false
     }
@@ -202,7 +208,7 @@ export class ScheduleItemComponent implements OnInit {
   }
 
   haveFilters() {
-    return (!this.favory.filters || !this.favory.filters.length) ?false : true
+    return (this.favory.filters && this.favory.filters.length) ? true : false
   }
 
 

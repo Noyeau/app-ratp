@@ -50,8 +50,10 @@
       </button> -->
 
     </ng-container>
-    <ng-template #noDatas>
+    <ng-template #noDatas >
+      <ng-container *ngIf="!activeFilter">
       <p (click)="openBottomSchedule()">Aucune donnée</p>
+    </ng-container>
     </ng-template>
   </mat-nav-list>
 

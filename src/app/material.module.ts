@@ -16,6 +16,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const material=[
   MatChipsModule,
@@ -33,7 +34,8 @@ const material=[
   DragDropModule,
   MatMenuModule,
   MatDialogModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatProgressSpinnerModule
 ]
 
 
