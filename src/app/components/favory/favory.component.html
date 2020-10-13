@@ -1,22 +1,18 @@
 <div cdkDropListGroup>
   <!--   -->
-<div class="delete-zone" cdkDropList #delList="cdkDropList" [cdkDropListConnectedTo]="favList"
-(cdkDropListDropped)="deleteFavByIndex($event)"
-(cdkDropListEntered)="deleteOk = true"
-(cdkDropListExited)="deleteOk = false">
-<p></p>
-  <button *ngIf="dragActive" mat-mini-fab  [disabled]="!deleteOk"
-    aria-label="Example icon button with a home icon" >
-    <mat-icon>clear</mat-icon>
-  </button>
-</div>
+  <div class="delete-zone" cdkDropList #delList="cdkDropList" [cdkDropListConnectedTo]="favList"
+    (cdkDropListDropped)="deleteFavByIndex($event)" (cdkDropListEntered)="deleteOk = true"
+    (cdkDropListExited)="deleteOk = false">
+    <p></p>
+    <button *ngIf="dragActive" mat-mini-fab [disabled]="!deleteOk" aria-label="Example icon button with a home icon">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
 
 
 
-  <div class="flex-container space-between" cdkDropList
-  (cdkDropListDropped)="drop($event)"
-  cdkDropList #favList="cdkDropList" [cdkDropListConnectedTo]="delList"
-    >
+  <div class="flex-container space-between" cdkDropList (cdkDropListDropped)="drop($event)" cdkDropList
+    #favList="cdkDropList" [cdkDropListConnectedTo]="delList">
     <div class="example-button-container">
 
     </div>

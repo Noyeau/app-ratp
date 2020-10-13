@@ -10,6 +10,13 @@ export class FavoryService {
     if (!this.favoryList) {
       this.favoryList = []
     }
+
+    // AFAC
+    this.favoryList.map(fav=>{
+      if(!fav.show || typeof fav.show == "string"){
+        this.favoryList.show = [null]
+      }
+    })
   }
 
 
