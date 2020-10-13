@@ -1,22 +1,103 @@
-<!-- <div class="flex-container">
-
-  <app-schedule *ngFor="let elem of elems" [lineCode]="elem.code" [lineType]="elem.type" [stationSlug]="elem.slug">
-
-  </app-schedule>
-</div> -->
 <div class="flex-container space-between" cdkDropList (cdkDropListDropped)="drop($event)">
-  <!-- <mat-accordion class="example-headers-align" cdkDropList (cdkDropListDropped)="drop($event)" multi> -->
+
+  <div class="flex-item" *ngFor="let favory of favoryList(); let first = first" cdkDrag>
+
+    <mat-card class="example-card">
+
+      <mat-card-header>
+        <div class="flex-container space-between" style="width: 100%;">
+
+          <mat-icon class="left" cdkDragHandle>
+            drag_indicator
+          </mat-icon>
+
+
+          <div>
+            <img style="width: 30px; margin:3px" [src]="getIcon(favory.type)" />
+            <img style="width: 30px; margin:3px" [src]="getIcon(favory.type, favory.code)" />
+          </div>
+        <mat-card-title>{{favory.stationName}}</mat-card-title>
+
+          
+          <mat-button-toggle-group #group="matButtonToggleGroup" [value]="favory.show"
+            (change)="changeShowValue(favory, $event.value)">
+            <mat-button-toggle #btn [class.filtred]="btn.checked" value="filtred" aria-label="Text align left" [disabled]="!favory.filters || !favory.filters.length">
+              <mat-icon inline>visibility</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle [class.all]="favory.show == 'none'" value="all" *ngIf="favory.show !== 'all'" aria-label="Text align center">
+              <mat-icon inline>reorder</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle class="none" value="none" *ngIf="favory.show == 'all'" aria-label="Text align right">
+              <mat-icon inline>clear</mat-icon>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content *ngIf="favory.show !== 'none'">
+        <div class="flex-container">
+          <div class="flex-item">
+            <app-schedule-item [activeFilter]="favory.show == 'filtred'"
+              [displayFilters]="favory.show == 'all'" [lineCode]="favory.code" [lineType]="favory.type"
+              [stationSlug]="favory.slug">
+            </app-schedule-item>
+          </div>
+        </div>
+        <button *ngIf="favory.show == 'all'" mat-mini-fab (click)="deleteFav(favory)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </mat-card-content>
+      <!-- <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions> -->
+    </mat-card>
+
+
+
+
+
+
+
+
+  </div>
+
+</div>
+
+
+
+<!-- 
+<div class="flex-container space-between" cdkDropList (cdkDropListDropped)="drop($event)">
+ 
   <div class="flex-item" *ngFor="let favory of favoryList; let first = first" cdkDrag>
 
     <mat-expansion-panel [expanded]="false"  #panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>
+        <mat-icon class="left" cdkDragHandle>
+          drag_indicator
+        </mat-icon>
+        <mat-panel-title >
           <img style="width: 30px; margin:3px" [src]="getIcon(favory.type)" />
           <img style="width: 30px; margin:3px" [src]="getIcon(favory.type, favory.code)" />
         </mat-panel-title>
-        <mat-panel-description>
+        <mat-panel-description >
           {{favory.stationName}}
         </mat-panel-description>
+
+        <mat-button-toggle-group #group="matButtonToggleGroup">
+          <mat-button-toggle value="filtred" aria-label="Text align left">
+            <mat-icon inline >visibility</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="all" aria-label="Text align center">
+            <mat-icon inline>reorder</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="none" aria-label="Text align right">
+            <mat-icon inline>visibility_off</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+ 
+
+
       </mat-expansion-panel-header>
       <app-schedule-item *ngIf="panel.expanded" [lineCode]="favory.code" [lineType]="favory.type" [stationSlug]="favory.slug" [displayFilters]="true">
       </app-schedule-item>
@@ -26,5 +107,6 @@
     <app-schedule-item *ngIf="!panel.expanded" [lineCode]="favory.code" [lineType]="favory.type" [stationSlug]="favory.slug" [activeFilter]="true">
     </app-schedule-item>
   </div>
-  <!-- </mat-accordion> -->
+
 </div>
+ -->

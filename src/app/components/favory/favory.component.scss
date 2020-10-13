@@ -1,0 +1,22 @@
+.left{
+    left: 5px;
+    position: absolute;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+
+
+
+.mat-button-toggle.none{
+    background-color: red;
+}
+
+.mat-button-toggle.all{
+    background-color: rgb(0, 200, 0);
+}
+
+
+.mat-button-toggle.filtred{
+    background-color: rgb(240, 240, 52);
+}

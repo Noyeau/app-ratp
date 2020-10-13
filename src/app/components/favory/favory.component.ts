@@ -9,7 +9,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./favory.component.scss']
 })
 export class FavoryComponent implements OnInit {
-  favoryList = []
+  
   constructor(
     private favoryService: FavoryService,
     private iconService: IconService
@@ -17,8 +17,8 @@ export class FavoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.favoryList = this.favoryService.favoryList
-    if(!this.favoryList || !this.favoryList.length){
+
+    if (!this.favoryList() || !this.favoryList().length) {
     }
   }
 
@@ -27,8 +27,24 @@ export class FavoryComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.favoryList, event.previousIndex, event.currentIndex);
-    this.favoryService.updateFavoryList(this.favoryList)
+    let tmp = this.favoryList()
+    moveItemInArray(tmp, event.previousIndex, event.currentIndex);
+    this.favoryService.updateFavoryList(tmp)
   }
+
+  deleteFav(fav){
+    console.log(fav)
+    this.favoryService.deleteFavory(fav.type, fav.code, fav.slug)
+  }
+
+  favoryList(){
+    return this.favoryService.favoryList
+  }
+  changeShowValue(favory, valueSow) {
+    favory.show = valueSow
+    this.favoryService.updateFavory(favory)
+  }
+
+
 
 }
