@@ -21,7 +21,6 @@ export class InfoTraficComponent implements OnInit {
   ) {
     this.ratpService.getTraffic().subscribe(res=>{
       this.infoTraffic = res
-      console.log(res)
     })
   }
 

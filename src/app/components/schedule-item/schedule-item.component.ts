@@ -105,10 +105,7 @@ export class ScheduleItemComponent implements OnInit {
     if (this._request) {
       this._request.unsubscribe()
     }
-    console.log("ava,t", this.activeFilter)
-
     if (this.activeFilter && !this.haveFilters()) {
-      console.log("bloqué", this.activeFilter)
       return
     }
     this._request = this.ratpService.getSchedule(this.lineType, this.lineCode, this.stationSlug).subscribe((res: any) => {
@@ -191,7 +188,6 @@ export class ScheduleItemComponent implements OnInit {
     if (index !== -1) {
       this.favory.filters.splice(index, 1);
     }
-    console.log(this.favory)
     this.favoryService.updateFavory(this.favory)
   }
 
@@ -212,4 +208,7 @@ export class ScheduleItemComponent implements OnInit {
   }
 
 
+  isOnline(){
+    return navigator.onLine
+  }
 }

@@ -1,11 +1,11 @@
 
-  <mat-nav-list>
+  <mat-nav-list >
     <ng-container *ngIf='datas.length; else noDatas'>
 
       <ng-container *ngFor="let destination of datas">
         <ng-container *ngIf="displayDestination(destination.destination)">
 
-          <mat-card class="example-card">
+          <mat-card class="example-card" [class.offline]="!isOnline()">
             <mat-card-header>
               <mat-card-subtitle (click)="openBottomSchedule()">{{destination.destination}}</mat-card-subtitle>
               <button class="top-right" *ngIf="displayFilters && (!activeFilter || !haveFilters()) && isfavoris()"
