@@ -13,7 +13,7 @@
         <mat-card class="example-card">
           <mat-card-header>
             <mat-card-subtitle  (click)="openBottomSchedule()">{{destination.destination}}</mat-card-subtitle>
-            <button  class="top-right" *ngIf="!displayFilters && isfavoris()" mat-icon-button (click)="checkFilter(destination.destination)"
+            <button  class="top-right" *ngIf="displayFilters && (!activeFilter || !haveFilters()) && isfavoris()" mat-icon-button (click)="checkFilter(destination.destination)"
               [color]="isInFilters(destination.destination)?'accent':'link'">
               <mat-icon>{{isInFilters(destination.destination)?'visibility':'visibility_off'}}</mat-icon>
             </button>
@@ -49,8 +49,8 @@
 
     <button style="width: 100%;" mat-raised-button
     *ngIf="isfavoris() && haveFilters()"
-    (click)="displayFilters = !displayFilters">
-      {{displayFilters?'Tout afficher':'Réduire'}}
+    (click)="activeFilter = !activeFilter">
+      {{activeFilter?'Tout afficher':'Réduire'}}
     </button>
 
   </ng-container>

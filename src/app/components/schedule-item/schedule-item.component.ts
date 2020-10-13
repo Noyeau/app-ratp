@@ -17,7 +17,11 @@ export class ScheduleItemComponent implements OnInit {
 
 
   public favory
-  @Input() public displayFilters = true
+  @Input() public displayFilters = false
+
+  @Input() public activeFilter = false
+
+
 
   private _lineType
   private _lineCode
@@ -61,6 +65,9 @@ export class ScheduleItemComponent implements OnInit {
     public dialog: MatDialog
   ) { }
   init() {
+    if(this.activeFilter){
+      this.displayFilters = true
+    }
     if (this.lineType && this.lineCode && this.stationSlug) {
 
       this.favory = this.favoryService.getfavory(this.lineType, this.lineCode, this.stationSlug)
@@ -158,7 +165,7 @@ export class ScheduleItemComponent implements OnInit {
 
 
   displayDestination(destination) {
-    if (!this.displayFilters || !this.favory || !this.favory.filters) {
+    if (!this.displayFilters || !this.activeFilter || !this.favory || !this.favory.filters) {
       return true
     }
     if (!this.favory.filters.length) {
