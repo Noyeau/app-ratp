@@ -23,6 +23,7 @@ export class FavoryService {
       this.favoryList.push({ type, code, slug, stationName })
     }
     this.saveFavory()
+    return this.getfavory(type, code, slug)
   }
 
   deleteFavory(type, code, slug) {
@@ -41,8 +42,17 @@ export class FavoryService {
     localStorage.setItem('favoryList', JSON.stringify(this.favoryList))
   }
 
-  updateFavoryList(favorylist){
-    this.favoryList=favorylist
+  updateFavoryList(favorylist) {
+    this.favoryList = favorylist
     this.saveFavory()
+  }
+
+
+  updateFavory(favory) {
+    let fav = this.getfavory(favory.type, favory.code, favory.slug)
+    if (fav) {
+      Object.assign(fav,favory)
+      this.saveFavory()
+    }
   }
 }

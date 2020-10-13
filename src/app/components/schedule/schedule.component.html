@@ -1,7 +1,7 @@
 <div>
   <div class="flex-container space-between">
     <div>
-      <button mat-mini-fab (click)="share()" color="accent">
+      <button mat-mini-fab *ngIf="canShare()" (click)="share()" color="accent">
         <mat-icon aria-hidden="false" aria-label="addFavory">
           share
         </mat-icon>
@@ -44,15 +44,24 @@
       <mat-card-header>
         <h3> {{destination.destination}}</h3>
       </mat-card-header>
-      <mat-chip-list aria-label="Fish selection">
+      <mat-card-content>
+        <div class="flex-container">
+        <app-schedule-message class="flex-item" *ngFor="let schedule of destination.trains" [schedule]="schedule">
+        </app-schedule-message>
+      </div>
+      </mat-card-content>
+      <!-- <mat-chip-list aria-label="Fish selection">
 
+
+    
 
         <ng-container *ngFor="let train of destination.trains">
           <mat-chip color="primary" selected
+
             (click)="train.mission?openDialog(train.mission?.code, train.mission?.stations):null">
             {{train.mission?.code}} {{train.message}}</mat-chip>
         </ng-container>
-      </mat-chip-list>
+      </mat-chip-list> -->
     </mat-card>
   </ng-container>
   <ng-template #noDatas>

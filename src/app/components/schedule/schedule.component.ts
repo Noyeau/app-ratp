@@ -50,7 +50,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     private ratpService: NgxNoyRatpService,
     public favoryService: FavoryService,
     private iconService: IconService,
-    public dialog: MatDialog
   ) { }
   init() {
     if(this.lineType && this.lineCode && this.stationSlug){
@@ -146,14 +145,6 @@ canShare(){
   }
 
 
-  openDialog(title, list): void {
-    const dialogRef = this.dialog.open(ModalListComponent, {
-      width: '250px',
-      data: {title, list}
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
 
 }

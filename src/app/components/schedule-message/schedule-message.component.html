@@ -1,0 +1,7 @@
+<!-- <pre>
+  {{schedule|json}}
+  </pre> -->
+<div class="message-bloc">
+  <span *ngIf="schedule.code" class="code" (click)="openDialog()">{{schedule.code}}</span>
+  <span class="message">{{schedule.message}}</span>
+</div>

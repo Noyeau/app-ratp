@@ -20,6 +20,7 @@ import { InfoTraficComponent } from './components/infoTrafic/infoTrafic.componen
 import { DisplayIconComponent } from './components/display-icon/display-icon.component';
 import { ModalInfoComponent } from './components/modal-info/modal-info.component';
 import { PubComponent } from './components/pub/pub.component';
+import { ScheduleMessageComponent } from './components/schedule-message/schedule-message.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { PubComponent } from './components/pub/pub.component';
     InfoTraficComponent,
     DisplayIconComponent,
     ModalInfoComponent,
-    PubComponent
+    PubComponent,
+    ScheduleMessageComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 <ng-container *ngFor="let type of infoTraffic | keyvalue;">
         <img style="width: 50px; margin:3px" [src]="getIcon(type.key)" />
 
-  <div class="flex-container space-between">
+  <div class="flex-container">
     <ng-container *ngFor="let info of type.value">
       <ng-container *ngIf="getIcon(type.key, (type.key =='rers') ? info.line : info.line.toLowerCase()); else noIcon">
         <div class="icon-background" (click)="openDialog(info)"

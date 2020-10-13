@@ -4,22 +4,24 @@
 
   </app-schedule>
 </div> -->
+<div class="flex-container space-between" cdkDropList (cdkDropListDropped)="drop($event)">
+  <!-- <mat-accordion class="example-headers-align" cdkDropList (cdkDropListDropped)="drop($event)" multi> -->
+  <div class="flex-item" *ngFor="let favory of favoryList; let first = first">
 
-<mat-accordion class="example-headers-align" cdkDropList (cdkDropListDropped)="drop($event)">
-  <mat-expansion-panel  *ngFor="let favory of favoryList; let first = first" [expanded]="first" cdkDrag>
-    <mat-expansion-panel-header >
-      <mat-panel-title>
-        <img style="width: 30px; margin:3px" [src]="getIcon(favory.type)" />
-        <img style="width: 30px; margin:3px" [src]="getIcon(favory.type, favory.code)" />
-      </mat-panel-title>
-    <mat-panel-description>
-      {{favory.stationName}}
-    </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-schedule-item  [lineCode]="favory.code" [lineType]="favory.type" [stationSlug]="favory.slug">
-    </app-schedule-item>
+    <mat-expansion-panel [expanded]="(favory.filters && favory.filters.length) ? true:false" cdkDrag>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <img style="width: 30px; margin:3px" [src]="getIcon(favory.type)" />
+          <img style="width: 30px; margin:3px" [src]="getIcon(favory.type, favory.code)" />
+        </mat-panel-title>
+        <mat-panel-description>
+          {{favory.stationName}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-schedule-item [lineCode]="favory.code" [lineType]="favory.type" [stationSlug]="favory.slug" [displayFilters]="true">
+      </app-schedule-item>
 
-
-  </mat-expansion-panel>
- 
-</mat-accordion>
+    </mat-expansion-panel>
+  </div>
+  <!-- </mat-accordion> -->
+</div>

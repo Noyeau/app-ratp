@@ -3,23 +3,26 @@
   <mat-step [completed]="selection.lineType ? true:false">
     <ng-template matStepLabel>
       Type de Transport
-      <app-display-icon *ngIf="selection.lineType" [lineType]="selection.lineType" [size]="'30px'" [fontSize]="'20px'"></app-display-icon>
+      <app-display-icon *ngIf="selection.lineType" [lineType]="selection.lineType" [size]="'30px'" [fontSize]="'20px'">
+      </app-display-icon>
 
       <!-- <img *ngIf="selection.lineType" style="width: 20px; margin:3px" [src]="getIcon(selection.lineType)" /> -->
     </ng-template>
-    <div class="flex-container space-around">
-    <ng-container *ngFor="let lineType of getLineType()">
-      <app-display-icon [lineType]="lineType" (click)="setLineType(lineType) ;stepper.next()" [size]="'70px'" [fontSize]="'50px'"></app-display-icon>
-    </ng-container>
+    <div class="flex-container">
+      <ng-container *ngFor="let lineType of getLineType()">
+        <app-display-icon [lineType]="lineType" (click)="setLineType(lineType) ;stepper.next()" [size]="'70px'"
+          [fontSize]="'50px'"></app-display-icon>
+      </ng-container>
     </div>
   </mat-step>
 
   <mat-step [completed]="selection.line ? true:false">
     <ng-template matStepLabel>Ligne
-      <app-display-icon *ngIf="selection.line" [lineType]="selection.lineType" [lineCode]="selection.line.code" [size]="'30px'" [fontSize]="'20px'">
+      <app-display-icon *ngIf="selection.line" [lineType]="selection.lineType" [lineCode]="selection.line.code"
+        [size]="'30px'" [fontSize]="'20px'">
       </app-display-icon>
     </ng-template>
-    <div class="flex-container space-around">
+    <div class="flex-container">
       <ng-container *ngFor="let line of getLines(selection.lineType) | async">
         <app-display-icon [lineType]="selection.lineType" (click)="setLine(line);stepper.next()" [lineCode]="line.code">
         </app-display-icon>
@@ -39,10 +42,15 @@
     </mat-list>
   </mat-step>
 
-  <mat-step *ngIf="allValide()">
+  <!-- <mat-step *ngIf="allValide()"> -->
+  <mat-step>
     <ng-template matStepLabel>Resultat</ng-template>
-    <app-schedule [lineType]="selection.lineType" [lineCode]="selection.line.code"
-      [stationSlug]="selection.station.slug"></app-schedule>
+    <div *ngIf="allValide()">
+
+      <app-schedule [lineType]="selection.lineType" [lineCode]="selection.line.code"
+        [stationSlug]="selection.station.slug"></app-schedule>
+    </div>
+
   </mat-step>
 
 </mat-vertical-stepper>

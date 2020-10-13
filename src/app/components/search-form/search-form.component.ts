@@ -66,7 +66,6 @@ export class SearchFormComponent implements OnInit {
       if (isNaN(name)) {
         tmp = name.split('').filter((x, i, all) => i !== all.length - 1).join('')
         if (!isNaN(tmp)) {
-          console.log(tmp)
           return +tmp
         }
       }
