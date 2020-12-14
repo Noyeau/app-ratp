@@ -21,6 +21,7 @@ import { DisplayIconComponent } from './components/display-icon/display-icon.com
 import { ModalInfoComponent } from './components/modal-info/modal-info.component';
 import { PubComponent } from './components/pub/pub.component';
 import { ScheduleMessageComponent } from './components/schedule-message/schedule-message.component';
+import { NgxNoyRatpModule } from 'ngx-noy-ratp';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ScheduleMessageComponent } from './components/schedule-message/schedule
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
+    NgxNoyRatpModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
